@@ -12,10 +12,17 @@ dependencies = [
     "scipy>=1.10.0",
     "python-dotenv>=1.0.0",
     "requests>=2.31.0",
+    "pystray>=0.19.5",
+    "pillow>=10.0.0",
+    "keyboard>=0.13.5",
+    "pyperclip>=1.8.2",
+    "plyer>=2.1",
 ]
 
 [project.scripts]
 parle = "parle.cli:main"
+parle-tray = "parle.tray:main"
+parle-config = "parle.hotkey_dialog:main"
 
 [build-system]
 requires = ["hatchling"]
