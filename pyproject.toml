@@ -1,0 +1,22 @@
+[project]
+name = "parle"
+version = "0.1.0"
+description = "CLI tool to record microphone input, save as MP3, and play it back"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pyaudio>=0.2.14",
+    "click>=8.1.7",
+    "numpy>=1.24.0",
+    "soundfile>=0.12.1",
+    "scipy>=1.10.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+]
+
+[project.scripts]
+parle = "parle.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
