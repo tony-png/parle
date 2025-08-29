@@ -18,7 +18,8 @@ from .transcriber import AudioTranscriber
 @click.option('--keep-wav', is_flag=True, help='Keep the temporary WAV file')
 @click.option('--test-bitrates', is_flag=True, help='Test multiple bitrates (8k to 320k) to compare quality')
 @click.option('--transcribe', is_flag=True, help='Transcribe the audio using Deepinfra Voxtral API')
-def main(output, bitrate, no_playback, keep_wav, test_bitrates, transcribe):
+@click.option('--language', '-l', default='fr', help='Language for transcription (default: fr)')
+def main(output, bitrate, no_playback, keep_wav, test_bitrates, transcribe, language):
     """Record microphone input, save as MP3, and play it back."""
     
     if test_bitrates:
@@ -104,7 +105,7 @@ def main(output, bitrate, no_playback, keep_wav, test_bitrates, transcribe):
                 
                 if transcribe:
                     try:
-                        transcriber = AudioTranscriber()
+                        transcriber = AudioTranscriber(language=language)
                         transcription = transcriber.transcribe(mp3_path)
                         if transcription:
                             print(transcription)

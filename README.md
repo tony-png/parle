@@ -59,9 +59,14 @@ uv run parle --keep-wav
 
 ### Transcription
 
-Record and transcribe audio using Deepinfra's Voxtral model:
+Record and transcribe audio using Deepinfra's Voxtral model (default: French):
 ```bash
 uv run parle --transcribe
+```
+
+Transcribe in a different language:
+```bash
+uv run parle --transcribe --language en
 ```
 
 Transcribe with custom output:

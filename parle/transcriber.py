@@ -8,12 +8,13 @@ load_dotenv()
 
 
 class AudioTranscriber:
-    def __init__(self):
+    def __init__(self, language: str = "fr"):
         self.api_key = os.getenv('DEEPINFRA_API_KEY')
         if not self.api_key:
             raise ValueError("DEEPINFRA_API_KEY not found in environment variables")
         
-        self.api_url = "https://api.deepinfra.com/v1/audio/transcriptions"
+        self.api_url = "https://api.deepinfra.com/v1/openai/audio/transcriptions"
+        self.language = language
         
     def transcribe(self, audio_path: Path) -> Optional[str]:
         if not audio_path.exists():
@@ -30,7 +31,9 @@ class AudioTranscriber:
             }
             
             data = {
-                'model': 'mistralai/Voxtral-Mini-3B-2507'
+                'model': 'mistralai/Voxtral-Mini-3B-2507',
+                'language': self.language,
+                'response_format': 'text'
             }
             
             try:
@@ -43,8 +46,7 @@ class AudioTranscriber:
                 )
                 
                 if response.status_code == 200:
-                    result = response.json()
-                    return result.get('text', '')
+                    return response.text.strip()
                 else:
                     print(f"Transcription failed: {response.status_code} - {response.text}")
                     return None
